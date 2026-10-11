@@ -1,0 +1,29 @@
+/* Bar with the camera count, grid toggle and close-all, shown when two or more windows are open. */
+.px-ptoolbar {
+  position: absolute;
+  left: 50%;
+  bottom: 84px;
+  translate: -50% 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 6px 4px 14px;
+  border-radius: 999px;
+  z-index: 1000;
+  font-size: 12px;
+  background: var(--px-glass-bg-strong, rgba(26, 22, 20, 0.52));
+  -webkit-backdrop-filter: blur(24px) saturate(1.7) brightness(0.82);
+  backdrop-filter: blur(24px) saturate(1.7) brightness(0.82);
+  border: 1px solid var(--px-glass-border, rgba(255, 255, 255, 0.16));
+}
+.px-ptoolbar[hidden] {
+  display: none;
+}
+.px-ptoolbar__count {
+  margin-right: 6px;
+  color: var(--px-text-dim, rgba(255, 255, 255, 0.62));
+}
+.px-ptoolbar .glass-btn {
+  width: 32px;
+  height: 32px;
+}
