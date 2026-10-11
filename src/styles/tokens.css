@@ -1,0 +1,26 @@
+:root {
+  --px-orange: #ff7a1a;
+  --px-amber: #ffb347;
+  --px-gold: #ffd166;
+  --px-red: #e8452c;
+  --px-bg: #0b0c10;
+  --px-text: rgba(255, 255, 255, 0.94);
+  --px-text-dim: rgba(255, 255, 255, 0.62);
+  --px-glass-bg: rgba(30, 26, 24, 0.34);
+  --px-glass-bg-strong: rgba(26, 22, 20, 0.52);
+  --px-glass-border: rgba(255, 255, 255, 0.16);
+  --px-glass-highlight: rgba(255, 255, 255, 0.28);
+  --px-radius-lg: 24px;
+  --px-radius-md: 16px;
+  --px-radius-sm: 12px;
+  --px-gap: 12px;
+  --px-shadow: 0 12px 40px rgba(0, 0, 0, 0.38), 0 2px 8px rgba(0, 0, 0, 0.25);
+  --px-font:
+    -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', Inter,
+    system-ui, 'Segoe UI', Roboto, sans-serif;
+  --px-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --px-live: #3ddc84;
+  --px-snapshot: #ffb347;
+  --px-offline: #ff5d4d;
+  --px-unavailable: #9aa0ab;
+}
