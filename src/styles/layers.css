@@ -1,0 +1,97 @@
+/* Secondary layers (traffic, transit, bikes): honest status chips + pick card. */
+.px-notes {
+  position: absolute;
+  left: 50%;
+  top: 16px;
+  translate: -50% 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  pointer-events: none;
+  max-width: min(430px, calc(100vw - 32px));
+  z-index: 3;
+}
+.px-note,
+.px-pick {
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border-radius: 18px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  line-height: 1.3;
+  color: var(--px-text);
+}
+.px-note[hidden],
+.px-pick[hidden] {
+  display: none;
+}
+.px-note__label {
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 10.5px;
+  color: var(--px-text-dim);
+}
+.px-note__text {
+  color: var(--px-text);
+}
+.px-note__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--px-unavailable);
+  flex: none;
+}
+.px-note[data-tone='live'] .px-note__dot {
+  background: var(--px-live);
+  box-shadow: 0 0 8px var(--px-live);
+}
+.px-note[data-tone='sim'] .px-note__dot {
+  background: var(--px-orange);
+  box-shadow: 0 0 8px rgba(255, 122, 26, 0.7);
+}
+.px-note[data-tone='warn'] .px-note__dot {
+  background: var(--px-snapshot);
+}
+.px-pick {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  border-radius: 16px;
+  padding: 10px 14px;
+}
+.px-pick b {
+  font-size: 13px;
+}
+.px-pick span {
+  color: var(--px-text-dim);
+}
+@media (max-width: 720px) {
+  .px-notes {
+    max-width: calc(100vw - 140px); /* leave the logo and zoom column free */
+  }
+}
+.px-note__legend {
+  display: inline-flex;
+  gap: 8px;
+  margin-left: 2px;
+  font-size: 11px;
+  color: var(--px-text-dim);
+}
+.px-note__legend i {
+  font-style: normal;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.px-note__legend i::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--c);
+}
