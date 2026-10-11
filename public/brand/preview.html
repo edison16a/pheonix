@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pheonix brand assets</title>
+<style>
+body{margin:0;padding:24px;background:#0a0809;color:#fff4e8;font:14px system-ui,-apple-system,sans-serif}
+h1{font-size:18px;font-weight:600}.g{display:flex;flex-wrap:wrap;gap:20px}
+figure{margin:0;font-size:12px;color:#b9a99a}img{display:block;background:repeating-conic-gradient(#1a1514 0 25%,#120e0d 0 50%) 0 0/16px 16px;margin-bottom:6px}
+</style></head><body>
+<h1>Pheonix brand assets (2D). The 3D phoenix (splash/brand view) and the 3D globe mark are previewed through the app / Vite dev server.</h1>
+<div class="g" id="g"></div>
+<script>
+for (const [n,h] of [['globe.svg',200],['globe-mono.svg',200],['favicon.svg',64],['wordmark.svg',64],['og-image.svg',140],['favicon-16.png',16],['favicon-32.png',32],['favicon-48.png',48],['apple-touch-icon.png',90],['icon-192.png',96],['icon-512.png',128],['icon-maskable-512.png',128],['globe-transparent.png',200],['phoenix.svg',200],['phoenix-mono.svg',200],['phoenix-transparent.png',200],['og-image.png',140]]) {
+  const f=document.createElement('figure'),i=new Image();i.src=n;i.height=h;f.append(i,n);g.append(f);
+}
+</script></body></html>
