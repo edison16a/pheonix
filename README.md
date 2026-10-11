@@ -5,7 +5,7 @@
 <h1 align="center">Pheonix</h1>
 
 <p align="center">
-  An immersive 3D globe for exploring public cameras around the world, with live aircraft and a local voice assistant.
+  A 3D globe for browsing public cameras around the world, with live planes and voice control.
 </p>
 
 <p align="center">
@@ -16,13 +16,11 @@
 
 ## What it is
 
-Pheonix is a fullscreen globe you can fly around. Over 20,000 public cameras from traffic agencies and city
-open data portals show up as markers. Click one and a floating glass window plays its feed. You can also turn on
-live aircraft, simulated traffic, transit vehicles, bike share stations and place labels, and you can follow a
-plane or sit in its cockpit.
+Pheonix is a globe you can fly around. Public traffic and city cameras show up on it as small camera icons.
+Click one and the camera opens in a floating window.
 
-You can talk to it. Say "Hey Pheonix, take me to Tokyo" and it flies there. Speech recognition, speech
-synthesis and the wake word all run on your own machine, so no audio leaves it.
+You can also watch live planes, follow one, or sit in its cockpit. And you can talk to it. Say "Hey Pheonix,
+take me to Tokyo" and it flies there.
 
 ## Screenshots
 
@@ -32,106 +30,89 @@ synthesis and the wake word all run on your own machine, so no audio leaves it.
 
 <table>
   <tr>
-    <td width="50%"><img src="assets/screenshots/camera.png" alt="A London camera playing in a floating window"><br><sub>A public camera in London, opened from its marker.</sub></td>
-    <td width="50%"><img src="assets/screenshots/follow-plane.png" alt="Following an Airbus A320 over London"><br><sub>Following a live aircraft with the chase camera.</sub></td>
+    <td width="50%"><img src="assets/screenshots/camera.png" alt="A London camera in a floating window"><br><sub>A London traffic camera.</sub></td>
+    <td width="50%"><img src="assets/screenshots/follow-plane.png" alt="Following an Airbus A320 over London"><br><sub>Following a plane.</sub></td>
   </tr>
   <tr>
-    <td width="50%"><img src="assets/screenshots/cockpit.png" alt="Cockpit view from the same aircraft"><br><sub>Cockpit view from the same aircraft.</sub></td>
-    <td width="50%"><img src="assets/screenshots/loading.png" alt="The animated 3D phoenix on the loading screen"><br><sub>The loading screen with the 3D phoenix.</sub></td>
+    <td width="50%"><img src="assets/screenshots/cockpit.png" alt="Cockpit view from the same plane"><br><sub>Cockpit view of the same plane.</sub></td>
+    <td width="50%"><img src="assets/screenshots/loading.png" alt="The 3D phoenix on the loading screen"><br><sub>The loading screen.</sub></td>
   </tr>
 </table>
 
-## Features
+## What you can do
 
-- Fullscreen CesiumJS globe on keyless satellite imagery and terrain, with trackpad and mouse zoom toward the cursor.
-- Camera markers that cluster at low zoom, show a field of view cone up close, and are red for live video and amber for still snapshots.
-- A floating player that is draggable and resizable, with a grid mode for watching several cameras at once.
-- Data menu with live aircraft, simulated traffic, transit, bike share and location labels. All start on except labels.
-- Aircraft follow mode and cockpit view, with 3D models up close and smooth motion between data updates.
-- Voice commands for places, addresses, cameras, aircraft and layers. A chat panel and a typed command box do the same.
-- A procedural 3D phoenix for the loading screen and a 3D globe as the app mark.
+- Browse about 20,000 public cameras. Red icons are live video. Amber icons are photos that refresh.
+- Watch several cameras at once in a grid.
+- See live planes, then follow one or sit in its cockpit.
+- Turn on traffic, transit, bike share and place labels from the Data button.
+- Use your voice, a chat box or a typed command box. They all do the same things.
 
 ## How it works
 
-The browser app is plain ES modules. CesiumJS draws the globe. Three.js is only used for the logo and the
-globe mark, in its own canvas, so it never competes with the map for the GPU.
+The page is plain JavaScript. CesiumJS draws the globe. Three.js draws the logo and the little globe in the corner.
 
-Everything the browser cannot fetch directly goes through small proxy routes that run inside the Vite dev
-and preview server (`/api/cctv`, `/api/aircraft`, and the traffic, transit and bikes routes). They cache
-responses, throttle upstream calls, and only ever fetch URLs that the server itself registered.
+A small Vite server sits behind the page. It fetches camera lists, camera images, plane positions and the
+other data, and the page asks it instead of calling those sites directly. It also caches what it fetches
+so it does not hammer them.
 
-Cameras:
+Cameras: each source has its own small file in `server/cameras/providers/`. The server merges them into one
+list. The page downloads that list once and draws the markers. A video only starts when you open a camera.
 
-1. Each source has one loader in `server/cameras/providers/`. The catalog merges them, removes duplicates
-   and caches the result for 15 minutes.
-2. The browser downloads the catalog once (gzip, about 560 KB), keeps it in IndexedDB, and builds a spatial
-   index. Markers are drawn as billboards in a single collection, so thousands of cameras stay cheap.
-3. A stream only opens when you open a player. Live HLS goes through a bounded puller on the server,
-   still cameras refresh as images, and a few embed feeds use the operator's own player.
-4. Status is real. The player shows live only when video is actually advancing.
-
-Voice:
-
-1. The browser captures the microphone and streams 16 kHz audio to a local Python service on port 8791.
-2. The service matches the wake phrase "hey pheonix" on short local transcripts, records the command until
-   you stop talking, and transcribes it with whisper.cpp.
-3. A deterministic router turns the text into an action (no language model involved). Replies are spoken with
-   Kokoro, using a British male voice.
+Voice: a Python program runs on your computer. It waits for "hey pheonix", turns your speech into text with
+whisper.cpp, and speaks the reply with Kokoro. The page then matches the text to a command with plain rules.
+No AI model decides what to do.
 
 ## Project layout
 
 ```
-src/app/         startup order and the actions the voice assistant can call
-src/globe/       Cesium viewer, camera moves, wheel zoom, place search
-src/cameras/     catalog, clusters, markers, field of view, camera layer
-src/player/      floating players and stream adapters
-src/layers/      aircraft, traffic, transit, bikes, labels (one folder each)
-src/voice/       assistant, command router, microphone, chat and pill UI
-src/brand/       3D phoenix, 3D globe mark, splash screen
-src/ui/          glass shell: zoom buttons, Data menu, toast
-server/cameras/  camera providers, catalog, media proxy, routes
-server/providers data proxies for aircraft, traffic, transit and bikes
-server/voice/    local speech to text, text to speech, wake word (Python)
-scripts/         voice setup and the brand asset generator
-docs/            architecture, cameras, layers, aircraft, voice, brand
+src/app/         startup, and the actions the voice assistant can call
+src/globe/       the Cesium globe, camera moves, zoom, place search
+src/cameras/     camera list, clusters, markers, field of view cones
+src/player/      the floating camera windows
+src/layers/      planes, traffic, transit, bikes, labels
+src/voice/       the assistant, command router, chat box
+src/brand/       3D phoenix, 3D globe, loading screen
+server/cameras/  camera sources, merging, video proxy
+server/voice/    speech to text, text to speech, wake word (Python)
 test/            unit tests
+docs/            more detail on each part
 ```
-
-More detail is in `docs/ARCHITECTURE.md`.
 
 ## Getting started
 
-You need Node 22 or newer. Python 3.10 or newer is only needed for voice.
+You need Node 22 or newer.
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open http://localhost:4173. No account, API key or paid service is required.
+Open http://localhost:4173. You do not need an account or any API keys.
 
-To build and serve a production bundle:
+To build for production:
 
 ```bash
 npm run build
 npm run preview
 ```
 
-### Voice (optional)
+### Voice
 
-The first run downloads about 0.7 GB of local models into `.voice/`, which is git ignored.
+Voice is optional. You also need Python 3.10 or newer. The setup downloads about 0.7 GB of models into
+`.voice/`, which git ignores.
 
 ```bash
 bash scripts/setup-voice.sh --yes
 npm run voice
 ```
 
-Copy `.env.example` to `.env` to set your name, the assistant name and the voice. Click the microphone in the
-capsule at the bottom of the page and allow microphone access. If you do not want to use a microphone, the
-keyboard and chat buttons in the same capsule take typed commands.
+Then click the microphone in the bar at the bottom of the page and allow microphone access. No microphone?
+The keyboard and chat buttons next to it take typed commands.
 
-Some commands to try: "take me to Tokyo", "take me to the nearest camera", "show me a live camera in London",
-"follow the nearest plane", "show me traffic in Paris", "1600 Pennsylvania Avenue".
+To change your name, the assistant's name or the voice, copy `.env.example` to `.env` and edit it.
+
+Things to say: "take me to Tokyo", "take me to the nearest camera", "show me a live camera in London",
+"follow the nearest plane", "show me traffic in Paris", or a street address.
 
 ### Tests
 
@@ -141,19 +122,18 @@ npm test
 
 ## Limitations
 
-- Only a handful of cameras are live video (the Delaware DOT feeds and some embedded streams in Japan and
-  Korea). Everything else is a still image that refreshes. Operators change feeds without notice, so some
-  cameras will be offline.
-- Traffic is a simulation along real roads, except in New York when NYC DOT speed data is fresh. It is
-  labelled as simulated in the app.
-- The aircraft source (adsb.lol) rate limits heavy use. Aircraft only draw when you are zoomed in.
-- "Hey Pheonix" is matched from local speech recognition because no pretrained wake word model exists for
-  that phrase. It is a little less accurate than a trained model.
-- The voice setup script was only tested on macOS with Apple Silicon.
-- The app runs on the Vite server. Hosting it on a static or serverless platform needs the proxies ported
-  to a real server.
+- Only a few cameras are live video (Delaware, plus some streams in Japan and Korea). The rest are photos
+  that refresh. Cameras go offline without warning.
+- Traffic is a simulation on real roads. It only uses real data in New York, when that feed is fresh.
+  The app labels it as simulated.
+- The plane data source limits heavy use, so planes only show when you are zoomed in.
+- "Hey Pheonix" works by transcribing what you say and looking for the phrase. It is less exact than a
+  trained wake word.
+- The voice setup was only tested on a Mac with Apple Silicon.
+- The proxies run inside the Vite server. To host this on a static site you would need to move them to a
+  real server.
 
 ## Credits and licenses
 
-Pheonix is MIT licensed. It builds on parts of God's Eye View by Bilawal Sidhu (MIT). Imagery, camera feeds,
-aircraft models and voice models each have their own terms, listed in `THIRD_PARTY_NOTICES.md`.
+MIT licensed. Some code and the plane models come from God's Eye View by Bilawal Sidhu (also MIT).
+Imagery, camera feeds and voice models have their own terms. See `THIRD_PARTY_NOTICES.md`.
