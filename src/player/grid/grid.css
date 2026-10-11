@@ -1,0 +1,19 @@
+/* Grid mode: windows tile the screen, so dragging and resizing are off. */
+.px-players.is-grid .px-player {
+  transition:
+    transform 0.35s var(--px-ease, ease),
+    width 0.35s var(--px-ease, ease),
+    height 0.35s var(--px-ease, ease);
+}
+.px-players.is-grid .px-player__bar {
+  cursor: default;
+}
+.px-players.is-grid .px-player__resize {
+  display: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .px-players.is-grid .px-player {
+    animation: none;
+    transition: none;
+  }
+}
