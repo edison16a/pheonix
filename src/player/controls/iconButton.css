@@ -1,0 +1,12 @@
+/* Small round icon buttons used in window title bars. */
+.px-pbtn.glass-btn {
+  width: 32px;
+  height: 32px;
+}
+.px-pbtn svg {
+  width: 16px;
+  height: 16px;
+}
+.px-pbtn[hidden] {
+  display: none;
+}
