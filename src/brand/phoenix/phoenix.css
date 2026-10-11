@@ -1,0 +1,12 @@
+/* Host box and canvas for the 3D phoenix, and the flat fallback image when WebGL is missing. */
+
+.px-splash-logo,
+.px-brandview-logo {
+  position: relative;
+}
+.px-phoenix-canvas,
+.px-phoenix-fallback {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
