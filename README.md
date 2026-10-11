@@ -9,9 +9,9 @@
 </p>
 
 <p align="center">
-  <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-ff7a1a?style=flat-square&labelColor=ff7a1a">
-  <img alt="Node 22 or newer" src="https://img.shields.io/badge/node-%3E%3D22-ff7a1a?style=flat-square&labelColor=ff7a1a">
-  <img alt="Platform: web browser with WebGL 2" src="https://img.shields.io/badge/platform-web%20(WebGL%202)-ff7a1a?style=flat-square&labelColor=ff7a1a">
+  <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-ff7a1a?style=flat-square&amp;labelColor=ff7a1a&amp;cacheSeconds=3600">
+  <img alt="Node 22 or newer" src="https://img.shields.io/badge/node-%3E%3D22-ff7a1a?style=flat-square&amp;labelColor=ff7a1a&amp;cacheSeconds=3600">
+  <img alt="Platform: web browser" src="https://img.shields.io/badge/platform-web%20browser-ff7a1a?style=flat-square&amp;labelColor=ff7a1a&amp;cacheSeconds=3600">
 </p>
 
 ## What it is
