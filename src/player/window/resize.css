@@ -1,0 +1,30 @@
+/* Invisible edge and corner hit areas for resizing a window. */
+.px-player__resize {
+  position: absolute;
+  z-index: 3;
+  background: none;
+}
+.px-rs-e {
+  right: -3px;
+  top: 40px;
+  bottom: 14px;
+  width: 10px;
+  cursor: ew-resize;
+}
+.px-rs-s {
+  left: 14px;
+  right: 14px;
+  bottom: -3px;
+  height: 10px;
+  cursor: ns-resize;
+}
+.px-rs-se {
+  right: -3px;
+  bottom: -3px;
+  width: 20px;
+  height: 20px;
+  cursor: nwse-resize;
+}
+.px-player.is-min .px-player__resize {
+  display: none;
+}

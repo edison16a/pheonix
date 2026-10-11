@@ -1,0 +1,52 @@
+/* The picture area: the media element itself and the connecting spinner. */
+.px-player__body {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  background: #07080b;
+  margin: 0 6px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.px-player__media {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+.px-media {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #07080b;
+}
+.px-media--frame {
+  border: 0;
+  display: block;
+}
+.px-player:not(.has-frame) .px-media:not(.px-media--frame) {
+  opacity: 0.55;
+}
+.px-player[data-status='connecting'] .px-player__body::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 26px;
+  height: 26px;
+  margin: -13px 0 0 -13px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-top-color: var(--px-amber, #ffb347);
+  animation: px-spin 0.9s linear infinite;
+}
+@keyframes px-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .px-player[data-status='connecting'] .px-player__body::after {
+    animation: none;
+  }
+}

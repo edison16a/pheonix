@@ -1,0 +1,122 @@
+/* Floating glass camera players. The layer itself never captures the pointer. */
+#ui > .px-players,
+.px-players {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  font-family: var(--px-font, system-ui, sans-serif);
+}
+.px-players > * {
+  pointer-events: auto;
+}
+.px-player {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 280px;
+  overflow: hidden;
+  border-radius: var(--px-radius-md, 16px);
+  color: var(--px-text, #fff);
+  background: var(--px-glass-bg-strong, rgba(26, 22, 20, 0.52));
+  -webkit-backdrop-filter: blur(24px) saturate(1.7) brightness(0.82);
+  backdrop-filter: blur(24px) saturate(1.7) brightness(0.82);
+  border: 1px solid var(--px-glass-border, rgba(255, 255, 255, 0.16));
+  box-shadow: var(--px-shadow, 0 12px 40px rgba(0, 0, 0, 0.4));
+  transition: box-shadow 0.25s;
+  animation: px-pop 0.32s var(--px-ease, ease-out);
+  touch-action: none;
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .px-player {
+    background: rgba(26, 22, 20, 0.92);
+  }
+}
+.px-player.is-focused {
+  box-shadow: 0 0 0 1px rgba(255, 179, 71, 0.4), var(--px-shadow, 0 12px 40px rgba(0, 0, 0, 0.4));
+}
+@keyframes px-pop {
+  from {
+    opacity: 0;
+    scale: 0.96;
+  }
+}
+.px-player__bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 6px 6px 14px;
+  cursor: grab;
+  user-select: none;
+  min-height: 44px;
+}
+.px-player__title {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+.px-player__title strong {
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.px-player__title span {
+  font-size: 11px;
+  color: var(--px-text-dim, rgba(255, 255, 255, 0.62));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.px-player__actions {
+  display: flex;
+  gap: 0;
+  flex: none;
+}
+.px-player__foot {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 5px 14px 8px;
+  font-size: 10px;
+  opacity: 0.8;
+  color: var(--px-text-dim, rgba(255, 255, 255, 0.62));
+}
+.px-player__credit {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* Minimized: only the title bar stays. */
+.px-player.is-min {
+  height: auto !important;
+}
+.px-player.is-min .px-player__body,
+.px-player.is-min .px-player__foot {
+  display: none;
+}
+.px-player:fullscreen {
+  width: 100vw !important;
+  height: 100vh !important;
+  transform: none !important;
+  border-radius: 0;
+  background: #000;
+}
+@media (max-width: 600px) {
+  .px-player {
+    min-width: 240px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .px-player {
+    animation: none;
+    transition: none;
+  }
+}
