@@ -1,0 +1,31 @@
+.fatal {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 100;
+  padding: 24px;
+}
+.fatal .glass {
+  max-width: 420px;
+  padding: 28px;
+  text-align: center;
+}
+.fatal h1 {
+  margin: 0 0 8px;
+  font-size: 20px;
+}
+.fatal p {
+  margin: 0 0 16px;
+  color: var(--px-text-dim);
+  font-size: 14px;
+}
+.fatal button {
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 0;
+  font: 600 14px var(--px-font);
+  color: #1a0f05;
+  background: linear-gradient(180deg, var(--px-amber), var(--px-orange));
+  cursor: pointer;
+}
