@@ -1,0 +1,44 @@
+/* Startup splash: background, fade states and the status line. */
+
+.px-splash {
+  z-index: 10000;
+  background:
+    radial-gradient(
+      120% 70% at 50% 108%,
+      rgba(232, 69, 44, 0.22),
+      transparent 62%
+    ),
+    radial-gradient(
+      80% 55% at 50% 42%,
+      rgba(255, 122, 26, 0.1),
+      transparent 70%
+    ),
+    linear-gradient(180deg, #120d0c 0%, #0a0809 100%);
+}
+.px-splash.is-in {
+  opacity: 1;
+}
+.px-splash.is-out {
+  opacity: 0;
+  transition-duration: 0.52s;
+  pointer-events: none;
+}
+
+.px-splash-status {
+  height: 18px;
+  margin-top: 22px;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 244, 232, 0.5);
+}
+.px-splash-status-text {
+  display: inline-block;
+  transition:
+    opacity 0.16s ease,
+    transform 0.16s ease;
+}
+.px-splash-status-text.is-swap {
+  opacity: 0;
+  transform: translateY(3px);
+}
