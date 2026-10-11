@@ -1,0 +1,35 @@
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: var(--px-bg);
+  color: var(--px-text);
+  font-family: var(--px-font);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+#globe {
+  position: fixed;
+  inset: 0;
+}
+/* Cesium: drop its default chrome; keep required credits, restyled. */
+#globe .cesium-viewer-bottom {
+  left: 12px;
+  bottom: 8px;
+  right: auto;
+  max-width: 60vw;
+  font-size: 10px;
+  opacity: 0.7;
+}
+#globe .cesium-widget-credits {
+  color: var(--px-text-dim);
+}
+#ui {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+#ui > * {
+  pointer-events: auto;
+}
