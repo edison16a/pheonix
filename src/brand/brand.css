@@ -1,0 +1,10 @@
+/*
+ * Pheonix splash and brand view styles. Self-contained: every custom property has a fallback.
+ * Import order matters: the reduced motion rules must come last, and the shared overlay base first.
+ */
+@import './shared/overlay.css';
+@import './splash/splash.css';
+@import './splash/brandView.css';
+@import './phoenix/phoenix.css';
+@import './splash/wordmark.css';
+@import './shared/reducedMotion.css';
