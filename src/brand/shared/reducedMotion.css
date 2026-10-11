@@ -1,0 +1,18 @@
+/* Reduced motion: no slides, no letter drawing. Imported last so it wins over the component styles. */
+
+@media (prefers-reduced-motion: reduce) {
+  .px-splash,
+  .px-brandview,
+  .px-splash-stack,
+  .px-brandview-stack {
+    transition-duration: 0.01s;
+    transform: none;
+  }
+  .px-wm-letter {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .px-splash-status-text {
+    transition: none;
+  }
+}
