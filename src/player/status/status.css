@@ -1,0 +1,93 @@
+/* Status chip in the title bar, and the notice shown over the picture when a camera is down. */
+.px-chip[hidden] {
+  display: none;
+}
+.px-chip {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+  color: var(--px-text-dim, rgba(255, 255, 255, 0.62));
+}
+.px-chip::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--px-unavailable, #9aa0ab);
+}
+.px-chip[data-status='live'] {
+  color: #ff7d70;
+}
+.px-chip[data-status='live']::before {
+  background: #ff4d3d;
+  box-shadow: 0 0 6px rgba(255, 77, 61, 0.7);
+  animation: px-blink 1.8s ease-in-out infinite;
+}
+.px-chip[data-status='snapshot'] {
+  color: var(--px-amber, #ffb347);
+}
+.px-chip[data-status='snapshot']::before {
+  background: var(--px-amber, #ffb347);
+}
+.px-chip[data-status='offline'] {
+  color: var(--px-offline, #ff5d4d);
+}
+.px-chip[data-status='offline']::before {
+  background: transparent;
+  border: 1.5px solid var(--px-offline, #ff5d4d);
+  box-sizing: border-box;
+}
+.px-chip[data-status='connecting']::before,
+.px-chip[data-status='paused']::before {
+  background: rgba(255, 255, 255, 0.45);
+}
+@keyframes px-blink {
+  50% {
+    opacity: 0.35;
+  }
+}
+.px-player__notice {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--px-text, #fff);
+  background: rgba(10, 9, 8, 0.6);
+}
+.px-player__notice[hidden],
+.px-player__notice a[hidden] {
+  display: none;
+}
+.px-player__notice p {
+  margin: 0;
+  max-width: 28ch;
+}
+.px-player__link.glass-btn {
+  width: auto;
+  height: auto;
+  padding: 0;
+  border-radius: 0;
+  font-size: 11.5px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  color: var(--px-amber, #ffb347);
+}
+.px-player__link.glass-btn:hover {
+  background: transparent;
+}
+@media (prefers-reduced-motion: reduce) {
+  .px-chip[data-status='live']::before {
+    animation: none;
+  }
+}
