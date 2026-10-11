@@ -1,0 +1,114 @@
+.data {
+  position: absolute;
+  right: 16px;
+  bottom: 24px;
+  border-radius: 999px;
+}
+.data__btn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--px-text);
+  font: 500 14px var(--px-font);
+  height: 44px;
+  padding: 0 18px 0 14px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.data__btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.data__btn svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.data__pop {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 10px);
+  width: 240px;
+  padding: 8px;
+  border-radius: 22px;
+}
+.data__pop[hidden] {
+  display: none;
+}
+.data__row {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--px-text);
+  font: 500 14px var(--px-font);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  cursor: pointer;
+  text-align: left;
+}
+.data__row:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.data__icon svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.data__label {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+.data__label small {
+  color: var(--px-text-dim);
+  font-weight: 400;
+  font-size: 11px;
+}
+.data__switch {
+  width: 40px;
+  height: 24px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  position: relative;
+  transition: background 0.2s var(--px-ease);
+}
+.data__switch::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s var(--px-ease);
+}
+.data__row[aria-checked='true'] .data__switch {
+  background: linear-gradient(180deg, var(--px-amber), var(--px-orange));
+}
+.data__row[aria-checked='true'] .data__switch::after {
+  transform: translateX(16px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .data__switch,
+  .data__switch::after {
+    transition: none;
+  }
+}

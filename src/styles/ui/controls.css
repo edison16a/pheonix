@@ -1,0 +1,17 @@
+.controls {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+  border-radius: 26px;
+}
+@media (max-width: 720px) {
+  .controls {
+    top: auto;
+    bottom: 96px;
+    transform: none;
+  }
+}

@@ -1,0 +1,6 @@
+#voice-mount {
+  position: absolute;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+}
