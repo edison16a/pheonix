@@ -1,0 +1,25 @@
+/*
+ * Colours and the glass look shared by every voice component. The tokens fall back to plain
+ * values so the voice UI still looks right if the app theme variables are missing.
+ */
+.vx,
+.vx-chat {
+  --vx-orange: var(--px-orange, #ff7a1a);
+  --vx-amber: var(--px-amber, #ffb347);
+  --vx-bg: var(--glass-bg, rgba(20, 22, 28, 0.82));
+  --vx-border: var(--glass-border, rgba(255, 255, 255, 0.14));
+  --vx-fg: var(--px-fg, #f4f1ec);
+  --vx-muted: var(--px-fg-muted, rgba(244, 241, 236, 0.62));
+}
+/* The pill, its status line and the command bar all share one rounded glass surface. */
+.vx-pill, .vx-line, .vx-text {
+  background: var(--vx-bg); border: 1px solid var(--vx-border); border-radius: 999px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+}
+/* Real blur where the browser supports it, otherwise the more opaque background above stays. */
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .vx-pill, .vx-line, .vx-text {
+    background: var(--glass-bg, rgba(20, 22, 28, 0.45));
+    -webkit-backdrop-filter: blur(18px) saturate(140%); backdrop-filter: blur(18px) saturate(140%);
+  }
+}

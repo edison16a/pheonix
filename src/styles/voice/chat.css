@@ -1,0 +1,21 @@
+/* Chat panel: floats top right, glass like everything else. */
+.vx-chat {
+  position: fixed; top: 16px; right: 16px; z-index: 30; width: min(360px, calc(100vw - 32px));
+  max-height: min(60vh, 520px); display: flex; flex-direction: column; overflow: hidden;
+  border-radius: 22px; color: var(--vx-fg); font: 400 14px/1.4 var(--px-font, system-ui, sans-serif);
+}
+.vx-chat[hidden] { display: none; }
+.vx-chat__head { display: flex; align-items: center; justify-content: space-between; padding: 12px 12px 8px 16px; font-weight: 600; }
+.vx-chat__close { width: 28px; height: 28px; border: 0; border-radius: 50%; display: grid; place-items: center; color: inherit; background: rgba(255,255,255,0.08); cursor: pointer; }
+.vx-chat__close:hover { background: rgba(255,255,255,0.18); }
+.vx-chat__log { flex: 1; min-height: 120px; overflow-y: auto; padding: 4px 14px 8px; display: flex; flex-direction: column; gap: 6px; scrollbar-width: thin; }
+.vx-chat__msg { max-width: 86%; padding: 8px 12px; border-radius: 16px; overflow-wrap: anywhere; }
+.vx-chat__msg--user { align-self: flex-end; background: linear-gradient(180deg, var(--vx-amber), var(--vx-orange)); color: #1a0d00; border-bottom-right-radius: 6px; }
+.vx-chat__msg--bot { align-self: flex-start; background: rgba(255,255,255,0.12); border-bottom-left-radius: 6px; }
+.vx-chat__form { display: flex; align-items: center; gap: 6px; margin: 4px 10px 10px; padding: 4px 4px 4px 14px; border-radius: 999px; background: rgba(255,255,255,0.1); }
+.vx-chat__form:focus-within { background: rgba(255, 255, 255, 0.16); }
+.vx-chat__input { flex: 1; min-width: 0; background: transparent; border: 0; outline: 0; color: inherit; font: inherit; padding: 6px 0; }
+.vx-chat__input::placeholder { color: var(--vx-muted); }
+/* The form already lights up on focus, so the field itself skips the orange focus ring. */
+.vx-chat input:focus, .vx-chat input:focus-visible, .glass .vx-chat__input:focus-visible { outline: none; box-shadow: none; }
+.vx-chat__send { width: 30px; height: 30px; border-radius: 50%; border: 0; background: rgba(255,255,255,0.18); color: inherit; cursor: pointer; display: grid; place-items: center; }

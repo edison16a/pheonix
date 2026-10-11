@@ -1,0 +1,11 @@
+/* Command bar under the pill, for typing commands without a microphone. */
+.vx-text[hidden] { display: none; }
+.vx-text { display: flex; align-items: center; gap: 6px; padding: 4px 4px 4px 14px; width: min(92vw, 420px); }
+.vx-text:focus-within { background: rgba(255, 255, 255, 0.16); }
+.vx-text__input { flex: 1; min-width: 0; background: transparent; border: 0; outline: 0; color: inherit; font: inherit; padding: 6px 0; }
+.vx-text__input::placeholder { color: var(--vx-muted); }
+/* The bar already lights up on focus, so the field itself skips the orange focus ring. */
+.vx-text input:focus, .vx-text input:focus-visible { outline: none; box-shadow: none; }
+.vx-text__send { width: 30px; height: 30px; border-radius: 50%; border: 0; background: rgba(255,255,255,0.16); color: inherit; cursor: pointer; display: grid; place-items: center; }
+/* Visually hidden label text that screen readers still read. */
+.vx-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }

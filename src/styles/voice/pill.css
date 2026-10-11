@@ -1,0 +1,39 @@
+/* The voice pill: mic switch, privacy dot, state label, level bars and the status line above it. */
+.vx {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: var(--vx-fg); font: 500 13px/1.3 var(--px-font, system-ui, -apple-system, 'Segoe UI', sans-serif);
+  pointer-events: none; max-width: min(92vw, 520px);
+}
+/* The wrapper ignores the mouse so it never blocks the globe; its children take clicks again. */
+.vx > * { pointer-events: auto; }
+.vx-pill { display: flex; align-items: center; gap: 8px; padding: 5px 8px 5px 5px; }
+.vx-btn {
+  display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; border: 0;
+  background: rgba(255, 255, 255, 0.08); color: inherit; cursor: pointer; transition: background 0.15s, color 0.15s;
+}
+.vx-btn:hover { background: rgba(255, 255, 255, 0.16); }
+.vx-btn:focus-visible { outline: 2px solid var(--vx-amber); outline-offset: 2px; }
+.vx-toggle[aria-pressed='true'] { background: var(--vx-orange); color: #1a0d00; }
+/* Privacy dot: green while the mic is open, orange while the assistant is busy. */
+.vx-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255, 255, 255, 0.25); flex: none; }
+.vx--mic-live .vx-dot { background: #3ddc84; box-shadow: 0 0 0 3px rgba(61, 220, 132, 0.22); }
+.vx[data-state='activated'] .vx-dot, .vx[data-state='processing'] .vx-dot, .vx[data-state='listening'] .vx-dot { background: var(--vx-orange); box-shadow: 0 0 0 3px rgba(255, 122, 26, 0.3); }
+.vx-label { min-width: 72px; white-space: nowrap; }
+.vx-bars { display: none; align-items: center; gap: 2px; height: 14px; }
+.vx[data-state='listening'] .vx-bars, .vx[data-state='speaking'] .vx-bars { display: flex; }
+.vx-bars i { width: 3px; height: 100%; border-radius: 2px; background: var(--vx-amber); transform-origin: center; animation: vx-bar 0.9s ease-in-out infinite; }
+.vx-bars i:nth-child(2) { animation-delay: 0.12s; } .vx-bars i:nth-child(3) { animation-delay: 0.24s; } .vx-bars i:nth-child(4) { animation-delay: 0.36s; }
+@keyframes vx-bar { 0%, 100% { transform: scaleY(0.3); } 50% { transform: scaleY(1); } }
+.vx[data-state='activated'] .vx-label, .vx[data-state='listening'] .vx-label, .vx[data-state='processing'] .vx-label { color: var(--vx-amber); }
+/* Status line: only shown for warnings and errors. */
+.vx-line {
+  padding: 6px 14px; border-radius: 14px; color: var(--vx-muted); text-align: center; max-width: 100%;
+  overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+}
+.vx-line[hidden] { display: none; }
+.vx-line[data-level='error'] { color: #ff8f7a; }
+.vx-line[data-level='warn'] { color: var(--vx-amber); }
+@media (prefers-reduced-motion: reduce) { .vx-bars i { animation: none; transform: scaleY(0.6); } .vx-btn { transition: none; } }
+
+/* A pill button whose panel (chat or command bar) is open. */
+.vx-btn.is-on { background: var(--vx-orange); color: #1a0d00; }
