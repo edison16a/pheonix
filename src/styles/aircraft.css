@@ -1,0 +1,123 @@
+/* Aircraft layer: selected-aircraft card (liquid glass). */
+.px-ac-card {
+  position: absolute;
+  left: 16px;
+  bottom: 24px;
+  width: 308px;
+  box-sizing: border-box;
+  padding: 14px 14px 12px;
+  border-radius: var(--px-radius-lg);
+  animation: px-ac-in 0.28s var(--px-ease);
+  user-select: none;
+}
+.px-ac-card[hidden] {
+  display: none;
+}
+.px-ac-card__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+.px-ac-card__id {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+.px-ac-card__call {
+  font-size: 20px;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  color: var(--px-amber);
+}
+.px-ac-card__sub {
+  font-size: 12.5px;
+  color: var(--px-text-dim);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.px-ac-card__close.glass-btn {
+  width: 32px;
+  height: 32px;
+  margin: -4px -4px 0 0;
+  flex: none;
+}
+.px-ac-card__close svg {
+  width: 16px;
+  height: 16px;
+}
+.px-ac-card__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 14px;
+  margin: 12px 0 4px;
+}
+.px-ac-card__grid div {
+  display: grid;
+  gap: 1px;
+}
+.px-ac-card__grid span {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--px-text-dim);
+}
+.px-ac-card__grid b {
+  font-size: 15px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.px-ac-card__note {
+  margin: 8px 0 0;
+  font-size: 12px;
+  color: var(--px-text-dim);
+}
+.px-ac-card__note.is-warn {
+  color: var(--px-amber);
+}
+.px-ac-card__note[hidden] {
+  display: none;
+}
+.px-ac-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+.px-ac-card__actions .glass-btn {
+  height: 38px;
+  padding: 0 12px 0 9px;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+}
+.px-ac-card__actions .glass-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+.px-ac-card__actions .glass-btn[aria-pressed='true'] {
+  color: #1a0f05;
+  background: linear-gradient(180deg, var(--px-amber), var(--px-orange));
+  box-shadow: 0 0 18px rgba(255, 122, 26, 0.45);
+}
+.px-ac-card__actions .glass-btn[hidden] {
+  display: none;
+}
+@keyframes px-ac-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+}
+@media (max-width: 720px) {
+  .px-ac-card {
+    left: 12px;
+    right: 76px; /* leave the zoom controls free */
+    width: auto;
+    bottom: 92px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .px-ac-card {
+    animation: none;
+  }
+}
