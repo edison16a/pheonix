@@ -1,0 +1,38 @@
+{
+  "name": "pheonix",
+  "version": "1.0.0",
+  "description": "An immersive 3D globe for exploring public cameras around the world, with a local voice assistant.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Edison Law",
+  "homepage": "https://github.com/edison16a/pheonix#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edison16a/pheonix.git"
+  },
+  "bugs": {
+    "url": "https://github.com/edison16a/pheonix/issues"
+  },
+  "keywords": ["cesium", "3d-globe", "cctv", "public-cameras", "voice-assistant", "three.js"],
+  "private": true,
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node --test \"test/*.test.mjs\"",
+    "brand": "node scripts/brand/build.mjs",
+    "voice": "bash scripts/voice-service.sh"
+  },
+  "dependencies": {
+    "cesium": "^1.124.0",
+    "hls.js": "^1.7.3",
+    "three": "^0.170.0"
+  },
+  "devDependencies": {
+    "prettier": "3.9.6",
+    "sharp": "^0.35.4",
+    "vite": "^6.0.0",
+    "vite-plugin-cesium": "^1.2.23"
+  }
+}
